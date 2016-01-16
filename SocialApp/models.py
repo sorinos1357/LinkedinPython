@@ -4,20 +4,18 @@ from django import forms
 from django.contrib.auth.models import User
 
 
+class Role(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+
+
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True)
     id_user = models.ForeignKey(User)
-    first_name = models.CharField(max_length=10)
-    last_name = models.CharField(max_length=10)
+    name = models.CharField(max_length=50)
     birthday = models.DateField(blank=True, null=True)
     avatar = models.ImageField(width_field=50, height_field=50, max_length=100)
-
-
-class CompanyProfile(models.Model):
-    id = models.AutoField(primary_key=True)
-    id_user = models.ForeignKey(User)
-    name = models.CharField(max_length=10)
-    cover = models.ImageField(width_field=50, height_field=50, max_length=100)
+    role = models.ForeignKey(Role)
 
 
 class Message(models.Model):
